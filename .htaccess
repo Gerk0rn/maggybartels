@@ -1,0 +1,17 @@
+# index.php (mit Passwortschutz) statt der alten index.html ausliefern
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^index\.html$ index.php [L]
+</IfModule>
+
+# Suchmaschinen: nichts indexieren
+<IfModule mod_headers.c>
+Header set X-Robots-Tag "noindex, nofollow, noarchive"
+</IfModule>
+
+# Repo-Dateien nicht ausliefern
+<FilesMatch "^(README\.md|\.htaccess)$">
+Require all denied
+</FilesMatch>

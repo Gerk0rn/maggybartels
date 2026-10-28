@@ -1,8 +1,63 @@
+<?php
+// Passwortschutz: Seite erst nach Eingabe des Passworts anzeigen
+header('X-Robots-Tag: noindex, nofollow, noarchive');
+header('Cache-Control: private, no-store');
+session_start();
+$hash = '$2y$10$a/knHdcu8xPXQxDpt83xY.rlTfhPFnl2AENQMhJkSY/onXHLxvcVG';
+$fehler = false;
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['passwort'])) {
+  if (password_verify($_POST['passwort'], $hash)) {
+    session_regenerate_id(true);
+    $_SESSION['zugang'] = true;
+    header('Location: ' . strtok($_SERVER['REQUEST_URI'], '?'), true, 303);
+    exit;
+  }
+  $fehler = true;
+  usleep(800000);
+}
+if (empty($_SESSION['zugang'])):
+?><!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Thai Yoga Massage by Maggy Bartels</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&amp;family=Jost:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#EFE8E3;font-family:'Jost',system-ui,sans-serif;color:#2F2A26}
+form{background:#F5F0EC;border:1px solid #DCD1C8;padding:48px 40px;display:flex;flex-direction:column;align-items:center;gap:18px;width:min(360px,calc(100vw - 32px));box-sizing:border-box;text-align:center;animation:up .8s cubic-bezier(.2,.7,.2,1) both}
+@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+h1{margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:24px;letter-spacing:.2em;color:#7A5C43}
+p{margin:0;font-size:14px;color:#4A423C}
+input{font:inherit;font-size:18px;text-align:center;letter-spacing:.3em;width:100%;box-sizing:border-box;border:none;border-bottom:1px solid #3A3430;background:transparent;padding:10px 2px;color:#2F2A26}
+input:focus{outline:none;border-bottom-color:#8A6A4F}
+button{font:inherit;background:#8A6A4F;color:#fff;border:none;padding:14px 32px;font-size:13px;letter-spacing:.22em;cursor:pointer;transition:transform .3s,background-color .3s,box-shadow .3s}
+button:hover{background:#6E5340;transform:translateY(-3px);box-shadow:0 10px 22px -10px rgba(79,58,41,.6)}
+.fehler{color:#A0412D}
+</style>
+</head>
+<body>
+<form method="post">
+<svg width="72" height="54" viewBox="0 0 64 48" fill="none" stroke="#9A7A5E" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M32 6c-7 8-7 22 0 34 7-12 7-26 0-34z"/><path d="M32 40c-4-10-12-18-22-20 1 12 9 20 22 20z"/><path d="M32 40c4-10 12-18 22-20-1 12-9 20-22 20z"/><path d="M32 40C24 34 12 32 3 34c6 6 17 8 29 6z"/><path d="M32 40c8-6 20-8 29-6-6 6-17 8-29 6z"/></svg>
+<h1>THAI YOGA MASSAGE</h1>
+<p>Diese Seite ist noch nicht öffentlich.<br>Bitte gib das Passwort ein.</p>
+<?php if ($fehler): ?><p class="fehler" role="alert">Das Passwort ist leider falsch.</p><?php endif; ?>
+<label for="pw" style="position:absolute;left:-9999px">Passwort</label>
+<input id="pw" type="password" name="passwort" inputmode="numeric" autocomplete="current-password" autofocus required>
+<button type="submit">EINTRETEN</button>
+</form>
+</body>
+</html>
+<?php exit; endif; ?>
 <!doctype html>
 <html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
 <title>Thai Yoga Massage by Maggy Bartels</title>
 <meta name="description" content="Thai-Yoga-Massage by Maggy Bartels: sanfte Dehnung, rhythmischer Druck und achtsame Berührung. Kennenlern-Angebot 60 Minuten für 45 €.">
 <link rel="icon" href="favicon.ico" sizes="any">
