@@ -183,22 +183,26 @@ a{color:inherit}
 @media (max-width:760px){.ease__grid{grid-template-columns:1fr}}
 
 /* ---------- 3 · Spüren (the peak) ---------- */
-.feel .sc-stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:center;gap:clamp(1.5rem,4vw,5rem);padding:5rem var(--sc-gutter) 2rem}
-.feel{--open:clamp(0, calc(var(--sc-p,0) * 2.4 - .05), 1)}
-.feel__frame{position:relative;justify-self:center;width:min(100%,600px,calc((100svh - 8rem) * .934));aspect-ratio:710/760;
-  clip-path:circle(calc(13% + var(--open) * 74%) at 58% 17%);will-change:clip-path}
-.feel__frame img{width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply;transform:scale(calc(1.32 - var(--open) * .32));transform-origin:58% 17%;will-change:transform}
-.feel__words{position:relative;min-height:18rem;grid-column:1;grid-row:1}
+/* Centred: the photo sits in the middle from the start and its watercolor
+   edge widens with scroll; the words own a reserved band below, never on it. */
+.feel{--open:clamp(0, calc(var(--sc-p,0) * 2 - .02), 1)}
+.feel .sc-stage{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(.8rem,2.4vh,1.6rem);padding:4.6rem var(--sc-gutter) 1.4rem;text-align:center}
+.feel__frame{margin:0;flex:0 0 auto;height:min(60svh,640px);aspect-ratio:710/760;max-width:100%;
+  -webkit-mask-image:radial-gradient(ellipse calc(44% + var(--open) * 26%) calc(42% + var(--open) * 28%) at 52% 45%,#000 58%,transparent 100%);
+          mask-image:radial-gradient(ellipse calc(44% + var(--open) * 26%) calc(42% + var(--open) * 28%) at 52% 45%,#000 58%,transparent 100%);
+  transform:translate3d(0,calc((1 - var(--open)) * 3vh),0) scale(calc(.9 + var(--open) * .1));will-change:transform,mask-image}
+.feel__frame img{width:100%;height:100%;object-fit:contain}
+.feel__words{position:relative;flex:0 0 auto;width:min(40rem,100%);min-height:8.5rem}
 .feel__words > *{position:absolute;inset:0 0 auto 0}
-.feel__step .num{font-family:var(--sc-font-display);font-size:clamp(3rem,2rem + 3vw,5.4rem);line-height:1;color:var(--line);display:block}
-.feel__step h3{margin:.4rem 0 .9rem;font-size:.95rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase}
-.feel__step p{margin:0;max-width:30ch;font-size:var(--sc-t-lg);line-height:1.55;color:#3A3430}
-.feel__last{font-family:var(--sc-font-display);font-style:italic;font-size:clamp(2.2rem,1.4rem + 3vw,4.2rem);line-height:1.08;color:var(--brown);margin:0}
-.feel__frame{grid-column:2;grid-row:1}
-@media (max-width:860px){
-  .feel .sc-stage{grid-template-columns:1fr;grid-template-rows:auto 1fr;align-content:start;padding-top:5.2rem;gap:1rem}
-  .feel__frame,  .feel__words{grid-column:1;grid-row:2;min-height:12rem}
-  .feel__step p{font-size:1.05rem}
+.feel__step h3{margin:0 0 .5rem;font-size:.9rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase}
+.feel__step .num{font-family:var(--sc-font-display);font-size:1.6rem;letter-spacing:0;color:var(--line);margin-right:.6rem;vertical-align:-.1em}
+.feel__step p{margin:0 auto;max-width:34ch;font-size:var(--sc-t-lg);line-height:1.5;color:#3A3430}
+.feel__last{font-family:var(--sc-font-display);font-style:italic;font-size:clamp(2rem,1.4rem + 2.4vw,3.6rem);line-height:1.08;color:var(--brown);margin:0}
+@media (max-width:760px){
+  .feel .sc-stage{padding-top:4.8rem}
+  .feel__frame{height:auto;width:min(86vw,calc(48svh * .934))}
+  .feel__words{min-height:10.5rem}
+  .feel__step p{font-size:1.02rem}
 }
 
 /* ---------- 4 · Wählen (pan) ---------- */
@@ -364,30 +368,27 @@ a{color:inherit}
   </div>
 </section>
 
-<!-- 3 · Spüren: THE PEAK. Pinned; the photo opens from a small round window. -->
-<section class="feel" data-sc-act="pin" data-sc-span="3.4" data-sc-drift="#E9E0D8" data-chapter="1">
+<!-- 3 · Spüren: THE PEAK. Pinned; the centred photo opens up while the three movements cross below it. -->
+<section class="feel" data-sc-act="pin" data-sc-span="3.4" data-sc-drift="#ECE5DF" data-chapter="1">
   <div data-sc-stage>
+    <figure class="feel__frame">
+      <img src="maggy-thai-yoga-massage.jpg" width="710" height="760" alt="Maggy Bartels bei einer Thai-Yoga-Massage: sanfte Dehnung auf der Bodenmatte">
+    </figure>
     <div class="feel__words">
       <div class="feel__step" data-sc-cue="0.12 0.44 0.18 0.18">
-        <span class="num">I</span>
-        <h3>Sanfte Dehnung</h3>
+        <h3><span class="num">I</span>Sanfte Dehnung</h3>
         <p>Passive, yogaähnliche Dehnungen öffnen den Körper und schenken neue Beweglichkeit.</p>
       </div>
       <div class="feel__step" data-sc-cue="0.38 0.66 0.18 0.18">
-        <span class="num">II</span>
-        <h3>Rhythmischer Druck</h3>
+        <h3><span class="num">II</span>Rhythmischer Druck</h3>
         <p>Achtsamer Druck entlang der Energielinien löst Verspannungen in der Tiefe.</p>
       </div>
       <div class="feel__step" data-sc-cue="0.6 0.86 0.18 0.18">
-        <span class="num">III</span>
-        <h3>Achtsame Berührung</h3>
+        <h3><span class="num">III</span>Achtsame Berührung</h3>
         <p>Ruhe, Präsenz und Zeit nur für dich. Ein Moment, um wirklich anzukommen.</p>
       </div>
       <p class="feel__last" data-sc-cue="0.8 1 0.18 0">Und dann liegst du selbst auf der Matte.</p>
     </div>
-    <figure class="feel__frame" style="margin:0">
-      <img src="maggy-thai-yoga-massage.jpg" width="710" height="760" alt="Maggy Bartels bei einer Thai-Yoga-Massage: sanfte Dehnung auf der Bodenmatte">
-    </figure>
   </div>
 </section>
 
